@@ -9,7 +9,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -17,7 +20,6 @@ import lombok.ToString;
  */
 @Entity
 @Getter
-@Builder
 @ToString
 public class User {
 
@@ -25,21 +27,33 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
+    @Setter
     private String name;
 
     @Email
-    @NotBlank
+    @Setter
     private String email;
 
-    @NotBlank
+    @Setter
     @Size(min = 3, max = 8)
     private String password;
 
-    @NotBlank
+    @Setter
     private Role role;
 
-    @NotBlank
+    @Setter
     private boolean canLogin;
+
+    public User() {
+        super();
+    }
+
+    public User(String name, String email, String password, Role role, boolean canLogin) {
+        this.canLogin = canLogin;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.name = name;
+    }
 
 }
